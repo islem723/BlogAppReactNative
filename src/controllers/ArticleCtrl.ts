@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import Article from "../models/Article";
-import IArticle from "../types";
+import { Request, Response } from 'express';
+import Article from '../models/Article';
+import IArticle from '../types';
 
 export default async function createArticle(req: Request, res: Response) {
   try {
@@ -10,7 +10,7 @@ export default async function createArticle(req: Request, res: Response) {
     if (existingArticle) {
       return res
         .status(400)
-        .json({ error: "Article with the same title already exists" });
+        .json({ error: 'Article with the same title already exists' });
     }
 
     const newArticle = await Article.create({
@@ -25,7 +25,7 @@ export default async function createArticle(req: Request, res: Response) {
     res.status(201).json(newArticle);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 
@@ -36,12 +36,12 @@ export async function getArticleById(req: Request, res: Response) {
     const article = await Article.findOne({ _id: articleId });
 
     if (!article) {
-      return res.status(404).json({ error: "Article not found" });
+      return res.status(404).json({ error: 'Article not found' });
     }
     res.status(200).json(article);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 export async function getAllArticles(req: Request, res: Response) {
@@ -64,14 +64,14 @@ export async function UpdateArticle(req: Request, res: Response) {
         owner,
       },
     },
-    { upsert: false }
+    { upsert: false },
   );
 
   if (!updateRes.modifiedCount)
-    return res.status(404).json({ error: "No update!" });
+    return res.status(404).json({ error: 'No update!' });
 
   res.send({
-    message: "Article updated!",
+    message: 'Article updated!',
     product: await Article.findOne({ _id: articleid }),
   });
 }

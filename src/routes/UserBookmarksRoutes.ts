@@ -8,6 +8,7 @@ import createBookmark, {
 const UserBookmarkRoutes = express.Router();
 
 UserBookmarkRoutes.route("/").post(createBookmark).get(getAllfavoriteArticles);
+
 UserBookmarkRoutes.route("/:bookmarkId").delete(deleteBookmark);
 
 export default UserBookmarkRoutes;
